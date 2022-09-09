@@ -92,11 +92,42 @@
                     <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                         <div class="row">
                             <div class="col-lg-12">
-                                <a href="" class="btn btn-fill-out mb-3">Add new address</a>
+                                <a href="{{ path('address_new')}}" class="btn btn-fill-out mb-3">Add new address</a>
                             </div>
                         </div>
                         <div class="row">
+                            {% if app.user.addresses %}
+                                {% for address in app.user.adresses %}
+                                    
+                               
+                            <div class="col-lg-6">
+                                <div class="card mb-3 mb-lg-0">
+                                    <div class="card-header">
+                                        <h3> Your Address # 1 </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <address> {{address.fullName}} <br>
+                                            {{address.address}} <br>
+                                            {{address.complement}} <br>
+                                            {{address.city}} <br>
+                                            {{address.codePostal}} <br>
+                                            {{address.country}} <br>
 
+                                        </address>
+                                        <div class="btn-group">
+                                            <a href=" {{ path('address_edit', {'id':address.id})}} " class="btn btn-success">Edit</a>
+                                            <a href="" class="btn btn-success">Delete</a>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Sorry you haven't added an address to your account yet !</p>
+                            {% endif %}
+                            
 
                                     <div class="col-lg-6">
                                         <div class="card mb-3 mb-lg-0">
